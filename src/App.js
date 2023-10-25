@@ -69,8 +69,8 @@ function RobotVisualization() {
   const addLog = (message, color = "white") => {
     if (!hasFinished) {
       setLogs((prevLogs) => [
-        ...prevLogs,
         { message: `Time ${counter.toFixed(1)}s: ${message}`, color },
+        ...prevLogs,
       ]);
       setCounter((prevCounter) => prevCounter + 0.5);
     }
@@ -280,13 +280,16 @@ function RobotVisualization() {
         <div className="d-flex">
           <div className="log-div" style={{ textAlign: "left" }}>
             <h3>Tracking Logs:</h3>
-            <ul>
-              {logs.map((log, index) => (
-                <li key={index} style={{ backgroundColor: log.color }}>
-                  {log.message}
-                </li>
-              ))}
-            </ul>
+
+            <div>
+              <ul>
+                {logs.map((log, index) => (
+                  <li key={index} style={{ backgroundColor: log.color }}>
+                    {log.message}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
           <div className="report-div" style={{ textAlign: "left" }}>
             <h3>Performance Report:</h3>

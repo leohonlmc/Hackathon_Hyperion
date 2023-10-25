@@ -14,10 +14,14 @@
 
 .log-div {
   display: inline-block;
-  overflow: auto;
-  height: 400px;
+  height: 350px;
   width: 50%;
   padding: 10px;
+}
+
+.log-div > div {
+  overflow: auto;
+  height: 100%;
 }
 
 .report-div {
