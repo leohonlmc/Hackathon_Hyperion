@@ -194,7 +194,7 @@ function RobotVisualization() {
         </a>
       </nav>
       <h2 style={{ textAlign: "center", padding: "10px 0px" }}>
-        Demo Dashboard
+        R.A.T Dashboard
       </h2>
       <div className="App-body">
         <Stage
@@ -279,7 +279,7 @@ function RobotVisualization() {
         </Stage>
         <div className="d-flex">
           <div className="log-div" style={{ textAlign: "left" }}>
-            <h3>Logs:</h3>
+            <h3>Tracking Logs:</h3>
             <ul>
               {logs.map((log, index) => (
                 <li key={index} style={{ backgroundColor: log.color }}>
@@ -289,7 +289,7 @@ function RobotVisualization() {
             </ul>
           </div>
           <div className="report-div" style={{ textAlign: "left" }}>
-            <h3>Report:</h3>
+            <h3>Performance Report:</h3>
             <ul>
               <li>Total time: {totalTime}s</li>
               <li className="easy">
