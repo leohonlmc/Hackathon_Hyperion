@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Stage, Layer, Rect, Line, Text } from "react-konva";
+import { Stage, Layer, Rect, Line, Text, Image } from "react-konva";
 import "./App.css";
 
 const WIDTH = 800;
@@ -11,7 +11,6 @@ const FINISH_LINE = WIDTH - 50;
 
 //obstacles tyes : easy, medium, hard
 //state: liquid, soil, concrete
-//distance
 
 const OBSTACLE_TYPES = {
   easy: {
@@ -54,6 +53,11 @@ function RobotVisualization() {
   const [medium, setMedium] = useState(0);
   const [hard, setHard] = useState(0);
   const [totalTime, setTotalTime] = useState(0);
+  const [drillImage, setDrillImage] = useState(null);
+
+  const [easyImage, setEasyImage] = useState(null);
+  const [mediumImage, setMediumImage] = useState(null);
+  const [hardImage, setHardImage] = useState(null);
 
   const [performanceData, setPerformanceData] = useState({
     totalTime: 0,
@@ -73,6 +77,22 @@ function RobotVisualization() {
   };
 
   useEffect(() => {
+    const img = new window.Image();
+    img.src = "/drill.png";
+    img.onload = () => {
+      setDrillImage(img);
+    };
+
+    const loadImg = (src, setter) => {
+      const img = new window.Image();
+      img.src = src;
+      img.onload = () => setter(img);
+    };
+
+    loadImg("/easy.png", setEasyImage);
+    loadImg("/medium.png", setMediumImage);
+    loadImg("/hard.png", setHardImage);
+
     const robotInterval = setInterval(() => {
       if (hasFinished || isBlocked) {
         clearInterval(robotInterval);
@@ -109,7 +129,7 @@ function RobotVisualization() {
               obstacle.type
             } obstacle at position ${obstacle.x}, ${obstacle.y}.`
           );
-          setIsBlocked(true); // Set the robot to be blocked
+          setIsBlocked(true);
 
           setTimeout(() => {
             setObstacles((prevObstacles) =>
@@ -128,15 +148,14 @@ function RobotVisualization() {
               setHard((counter + 5).toFixed(1));
             }
 
-            // Update the performance data
             setPerformanceData((prevData) => {
               const newData = { ...prevData };
               newData[obstacle.type] +=
-                OBSTACLE_TYPES[obstacle.type].delay / 1000; // Convert ms to seconds
+                OBSTACLE_TYPES[obstacle.type].delay / 1000;
               newData.totalTime += OBSTACLE_TYPES[obstacle.type].delay / 1000;
               return newData;
             });
-            setIsBlocked(false); // Robot is no longer blocked
+            setIsBlocked(false);
           }, OBSTACLE_TYPES[obstacle.type].delay);
 
           break;
@@ -159,9 +178,19 @@ function RobotVisualization() {
 
   return (
     <div className="App">
-      <nav class="navbar navbar-light bg-light">
+      <nav
+        class="navbar navbar-light bg-light"
+        style={{ padding: "10px 20px" }}
+      >
         <a class="navbar-brand" href="#">
-          Hackathon Solution
+          <img
+            src="drill.png"
+            width="30"
+            height="30"
+            class="d-inline-block align-top"
+            alt=""
+          />
+          R.A.T
         </a>
       </nav>
       <div className="App-body">
@@ -172,23 +201,31 @@ function RobotVisualization() {
               stroke="green"
               strokeWidth={2}
             />
-            <Rect
-              x={robotPosition.x}
-              y={robotPosition.y}
-              width={ROBOT_SIZE}
-              height={ROBOT_SIZE}
-              fill="blue"
-            />
+            {drillImage && (
+              <Image
+                x={robotPosition.x}
+                y={robotPosition.y}
+                width={ROBOT_SIZE}
+                height={ROBOT_SIZE}
+                image={drillImage}
+              />
+            )}
             {obstacles.map((obstacle, index) => (
               <>
                 {obstacle.state === "intact" && (
-                  <Rect
-                    key={`rect-${index}`}
+                  <Image
+                    key={`obstacle-${index}`}
                     x={obstacle.x}
                     y={obstacle.y}
                     width={OBSTACLE_WIDTH}
                     height={OBSTACLE_HEIGHT}
-                    fill={OBSTACLE_TYPES[obstacle.type].color}
+                    image={
+                      obstacle.type === "easy"
+                        ? easyImage
+                        : obstacle.type === "medium"
+                        ? mediumImage
+                        : hardImage
+                    }
                   />
                 )}
                 {obstacle.state === "split" && (
@@ -251,6 +288,11 @@ function RobotVisualization() {
               <li>Time to break easy obstacles: {easy}s</li>
               <li>Time to break medium obstacles: {medium}s</li>
               <li>Time to break hard obstacles: {hard}s</li>
+            </ul>
+            <hr />
+            <h3>Equipment:</h3>
+            <ul>
+              <li>Total length: 500 feet</li>
             </ul>
           </div>
         </div>
