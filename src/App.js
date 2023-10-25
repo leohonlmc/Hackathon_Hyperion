@@ -14,7 +14,7 @@ const FINISH_LINE = WIDTH - 50;
 
 const OBSTACLE_TYPES = {
   easy: {
-    color: "green",
+    color: "rgb(0, 194, 0)",
     delay: 0,
   },
   medium: {
@@ -22,7 +22,7 @@ const OBSTACLE_TYPES = {
     delay: 3000, // 3 seconds
   },
   hard: {
-    color: "red",
+    color: "rgb(239, 63, 63)",
     delay: 5000, // 5 seconds
   },
 };
@@ -193,8 +193,15 @@ function RobotVisualization() {
           R.A.T
         </a>
       </nav>
+      <h2 style={{ textAlign: "center", padding: "10px 0px" }}>
+        Demo Dashboard
+      </h2>
       <div className="App-body">
-        <Stage width={WIDTH} height={HEIGHT}>
+        <Stage
+          width={WIDTH}
+          height={HEIGHT}
+          style={{ border: "1px solid black" }}
+        >
           <Layer>
             <Line
               points={PATH.flatMap((point) => [point.x, point.y])}
@@ -285,9 +292,15 @@ function RobotVisualization() {
             <h3>Report:</h3>
             <ul>
               <li>Total time: {totalTime}s</li>
-              <li>Time to break easy obstacles: {easy}s</li>
-              <li>Time to break medium obstacles: {medium}s</li>
-              <li>Time to break hard obstacles: {hard}s</li>
+              <li className="easy">
+                Time to break <strong>easy</strong> obstacles: {easy}s
+              </li>
+              <li style={{ backgroundColor: "yellow" }}>
+                Time to break <strong>medium</strong> obstacles: {medium}s
+              </li>
+              <li className="hard">
+                Time to break <strong>hard</strong> obstacles: {hard}s
+              </li>
             </ul>
             <hr />
             <h3>Equipment:</h3>
