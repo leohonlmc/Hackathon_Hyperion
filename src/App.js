@@ -121,11 +121,11 @@ function RobotVisualization() {
             );
 
             if (obstacle.type === "easy") {
-              setEasy(counter.toFixed(1) + 1);
+              setEasy((counter + 1).toFixed(1));
             } else if (obstacle.type === "medium") {
-              setMedium(counter.toFixed(1) + 3);
+              setEasy((counter + 3).toFixed(1));
             } else if (obstacle.type === "hard") {
-              setHard(counter.toFixed(1) + 5);
+              setEasy((counter + 5).toFixed(1));
             }
 
             // Update the performance data
