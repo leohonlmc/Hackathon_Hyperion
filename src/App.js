@@ -292,7 +292,8 @@ function RobotVisualization() {
             <hr />
             <h3>Equipment:</h3>
             <ul>
-              <li>Total length: 500 feet</li>
+              <li></li>
+              <li></li>
             </ul>
           </div>
         </div>
