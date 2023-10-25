@@ -54,6 +54,7 @@ function RobotVisualization() {
   const [hard, setHard] = useState(0);
   const [totalTime, setTotalTime] = useState(0);
   const [drillImage, setDrillImage] = useState(null);
+  const [manholeImage, setManholeImage] = useState(null);
 
   const [easyImage, setEasyImage] = useState(null);
   const [mediumImage, setMediumImage] = useState(null);
@@ -81,6 +82,12 @@ function RobotVisualization() {
     img.src = "/drill.png";
     img.onload = () => {
       setDrillImage(img);
+    };
+
+    const imgManhole = new window.Image();
+    imgManhole.src = "/manhole.png"; // This should be "imgManhole" not "img"
+    imgManhole.onload = () => {
+      setManholeImage(imgManhole);
     };
 
     const loadImg = (src, setter) => {
@@ -203,6 +210,13 @@ function RobotVisualization() {
           style={{ border: "1px solid black" }}
         >
           <Layer>
+            <Image
+              x={0} // start point's x-coordinate
+              y={PATH[0].y - OBSTACLE_HEIGHT / 2} // centered at the start point's y-coordinate
+              width={OBSTACLE_WIDTH}
+              height={OBSTACLE_HEIGHT}
+              image={manholeImage}
+            />
             <Line
               points={PATH.flatMap((point) => [point.x, point.y])}
               stroke="green"
@@ -275,6 +289,13 @@ function RobotVisualization() {
               strokeWidth={4}
               dash={[10, 10]}
             />
+            <Image
+              x={WIDTH - OBSTACLE_WIDTH} // end point's x-coordinate
+              y={PATH[PATH.length - 1].y - OBSTACLE_HEIGHT / 2} // centered at the end point's y-coordinate
+              width={OBSTACLE_WIDTH}
+              height={OBSTACLE_HEIGHT}
+              image={manholeImage}
+            />
           </Layer>
         </Stage>
         <div className="d-flex">
@@ -296,13 +317,16 @@ function RobotVisualization() {
             <ul>
               <li>Total time: {totalTime}s</li>
               <li className="easy">
-                Time to break <strong>easy</strong> obstacles: {easy}s
+                Time to encounter and break <strong>easy</strong> obstacles:{" "}
+                {easy}s
               </li>
               <li style={{ backgroundColor: "yellow" }}>
-                Time to break <strong>medium</strong> obstacles: {medium}s
+                Time to encounter and break <strong>medium</strong> obstacles:{" "}
+                {medium}s
               </li>
               <li className="hard">
-                Time to break <strong>hard</strong> obstacles: {hard}s
+                Time to encounter and break <strong>hard</strong> obstacles:{" "}
+                {hard}s
               </li>
             </ul>
             <hr />
