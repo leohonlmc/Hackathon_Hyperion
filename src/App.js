@@ -19,11 +19,11 @@ const OBSTACLE_TYPES = {
   },
   medium: {
     color: "yellow",
-    delay: 3000, // 3 seconds
+    delay: 3000,
   },
   hard: {
     color: "rgb(239, 63, 63)",
-    delay: 5000, // 5 seconds
+    delay: 5000,
   },
 };
 
@@ -85,7 +85,7 @@ function RobotVisualization() {
     };
 
     const imgManhole = new window.Image();
-    imgManhole.src = "/manhole.png"; // This should be "imgManhole" not "img"
+    imgManhole.src = "/manhole.png";
     imgManhole.onload = () => {
       setManholeImage(imgManhole);
     };
@@ -134,7 +134,7 @@ function RobotVisualization() {
           addLog(
             `Encountered a ${OBSTACLE_TYPES[obstacle.type].color} ${
               obstacle.type
-            } obstacle at position ${obstacle.x}, ${obstacle.y}.`
+            } debris at position ${obstacle.x}, ${obstacle.y}.`
           );
           setIsBlocked(true);
 
@@ -143,7 +143,7 @@ function RobotVisualization() {
               prevObstacles.filter((o) => o.x !== obstacle.x)
             );
             addLog(
-              `Used drill to split ${obstacle.type} obstacle at position ${obstacle.x}, ${obstacle.y} and cleaned the pieces.`,
+              `Pass through ${obstacle.type} debris at position ${obstacle.x}, ${obstacle.y}.`,
               OBSTACLE_TYPES[obstacle.type].color
             );
 
@@ -211,8 +211,8 @@ function RobotVisualization() {
         >
           <Layer>
             <Image
-              x={0} // start point's x-coordinate
-              y={PATH[0].y - OBSTACLE_HEIGHT / 2} // centered at the start point's y-coordinate
+              x={0}
+              y={PATH[0].y - OBSTACLE_HEIGHT / 2}
               width={OBSTACLE_WIDTH}
               height={OBSTACLE_HEIGHT}
               image={manholeImage}
@@ -290,8 +290,8 @@ function RobotVisualization() {
               dash={[10, 10]}
             />
             <Image
-              x={WIDTH - OBSTACLE_WIDTH} // end point's x-coordinate
-              y={PATH[PATH.length - 1].y - OBSTACLE_HEIGHT / 2} // centered at the end point's y-coordinate
+              x={WIDTH - OBSTACLE_WIDTH}
+              y={PATH[PATH.length - 1].y - OBSTACLE_HEIGHT / 2}
               width={OBSTACLE_WIDTH}
               height={OBSTACLE_HEIGHT}
               image={manholeImage}
