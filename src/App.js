@@ -327,12 +327,6 @@ function RobotVisualization() {
                 Time to encounter and pass <strong>hard</strong> debris: {hard}s
               </li>
             </ul>
-            <hr />
-            <h3>Equipment:</h3>
-            <ul>
-              <li></li>
-              <li></li>
-            </ul>
           </div>
         </div>
       </div>
