@@ -201,7 +201,7 @@ function RobotVisualization() {
         </a>
       </nav>
       <h2 style={{ textAlign: "center", padding: "10px 0px" }}>
-        R.A.T Dashboard
+        Robot Assistant Tunnelling​ Dashboard
       </h2>
       <div className="App-body">
         <Stage
