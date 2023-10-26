@@ -79,7 +79,7 @@ function RobotVisualization() {
 
   useEffect(() => {
     const img = new window.Image();
-    img.src = "/drill.png";
+    img.src = "/rat.png";
     img.onload = () => {
       setDrillImage(img);
     };
@@ -191,7 +191,7 @@ function RobotVisualization() {
       >
         <a class="navbar-brand" href="#">
           <img
-            src="drill.png"
+            src="rat.png"
             width="30"
             height="30"
             class="d-inline-block align-top"
@@ -317,16 +317,14 @@ function RobotVisualization() {
             <ul>
               <li>Total time: {totalTime}s</li>
               <li className="easy">
-                Time to encounter and break <strong>easy</strong> obstacles:{" "}
-                {easy}s
+                Time to encounter and pass <strong>easy</strong> debris: {easy}s
               </li>
               <li style={{ backgroundColor: "yellow" }}>
-                Time to encounter and break <strong>medium</strong> obstacles:{" "}
+                Time to encounter and pass <strong>medium</strong> debris:{" "}
                 {medium}s
               </li>
               <li className="hard">
-                Time to encounter and break <strong>hard</strong> obstacles:{" "}
-                {hard}s
+                Time to encounter and pass <strong>hard</strong> debris: {hard}s
               </li>
             </ul>
             <hr />
